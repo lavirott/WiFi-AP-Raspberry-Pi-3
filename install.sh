@@ -72,7 +72,7 @@ iface $WIFI inet static
   netmask 255.255.255.0
 "
 echo "$INTERF_CONF" > /etc/network/interfaces
-ifconfig $WLAN $IP_RANGE.1
+ifconfig $WIFI $IP_RANGE.1
 
 # setup hostapd.conf
 CONF_HOST="interface=$WIFI
@@ -100,7 +100,7 @@ echo 1 > /proc/sys/net/ipv4/ip_forward
 # add iptables
 iptables -t nat -F
 iptables -F
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+iptables -t nat -A POSTROUTING -o $INC -j MASQUERADE
 iptables -A FORWARD -i $INC -o $WIFI -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A FORWARD -i $WIFI -o $INC -j ACCEPT
 # save iptables
@@ -116,4 +116,4 @@ chmod +x /etc/network/if-up.d/iptables
 
 # test access point
 echo "Installation done!"
-/usr/sbin/hostapd /etc/hostapd/hostapd.conf & 
+/usr/sbin/hostapd /etc/hostapd/hostapd.conf &
