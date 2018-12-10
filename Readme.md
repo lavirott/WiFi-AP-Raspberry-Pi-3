@@ -16,15 +16,15 @@ This script was tested on:
 
 ## Installing
 ```
-git clone https://github.com/lavirott/wifi-ap-pi3.git
-cd wifi-ap-pi3
+git clone https://github.com/sebastianzillessen/WiFi-AP-Raspberry-Pi-3.git
+cd WiFi-AP-Raspberry-Pi-3
 chmod a+x install.sh
 sudo ./install.sh
 ```
 
 Your can specify the following parameters when calling `./install.sh`:
 
-1. SSID (default: RaspberryPi )
+1. SSID (default: $HOSTNAME )
 2. PASSPHRASE(default: raspberry)
 3. IP_RANGE (default: 192.168.222, produces IP of Pi with 192.168.222.1)
 4. Incoming Internet connection device (default: eth0)
@@ -33,7 +33,7 @@ Your can specify the following parameters when calling `./install.sh`:
 These are parsed in the order. So with
 
 ```
-./install.sh TestAP test123
+sudo ./install.sh TestAP test123
 ```
 You would setup your Raspberrypi with a SSID `TestAp` and a Password `test123`.
 
