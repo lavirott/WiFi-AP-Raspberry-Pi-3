@@ -1,14 +1,15 @@
 #!/bin/bash
 
-SSID="${1:-RaspberryPi}"
+SSID="${1:-$HOSTNAME}"
 PASSPHRASE="${2:-raspberry}"
 IP_RANGE="${3:-192.168.222}"
 INC="${4:-eth0}"
 WIFI="${5:-wlan0}"
 
 pause() {
-#	read -p "Appuyer sur une touche pour continuer ..." var
-	echo -n
+# If you want to apply changes in an interactive mode, uncomment the next line
+#  read -p "Press Enter to continue..." var
+	echo -n ; # a Shell function must not be empty, so "nop" if read is commented
 }
 
 begin() {
@@ -22,8 +23,8 @@ end() {
 
 if [ "`whoami`" != "root" ]
 then
-	echo "This script must be run as root."
-	echo "  sudo ./install.sh"
+	echo "This script must be run as root." 1>&2
+	echo "  sudo ./install.sh" 1>&2
 	exit -1
 fi
 
@@ -42,14 +43,14 @@ ifconfig -a | grep "$WIFI" > /dev/null
 if [ "$?" != "0" ]
 then
   echo
-  echo "$WIFI not found, exiting";
+  echo "$WIFI not found, exiting" 1>&2
   exit -1
 fi
 ifconfig -a | grep "$INC" > /dev/null
 if [ "$?" != "0" ]
 then
   echo
-  echo "$INC not found, exiting";
+  echo "$INC not found, exiting" 1>&2
   exit -1
 fi
 end
